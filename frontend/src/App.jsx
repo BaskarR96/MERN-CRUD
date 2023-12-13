@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import { Modal } from 'antd';
 import Table from './components/Table';
 import Button from './components/Button';
+import ModalForm from './components/ModalForm';
+import { addUser } from './utilis/formConfigs';
 
 function App() {
+
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
     const columns = [
         {
             name: 'First Name',
@@ -28,6 +24,7 @@ function App() {
     const rows = [
         { first_name: 'Lindsay', last_name: 'Walton', email: 'lindsay.walton@example.com' },
     ]
+
     return (
         <div className="p-4 sm:p-6 lg:p-8 xl:w-[50%] h-[100vh] mx-auto">
             <div className="sm:flex sm:items-center">
@@ -57,16 +54,19 @@ function App() {
                     </div>
                 </div>
             </div>
-            <Modal
-                title="Basic Modal"
-                open={isModalOpen}
-                onOk={handleOk}
-                onCancel={handleCancel}
-            >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-            </Modal>
+            <ModalForm
+                modalTitle={'Add User'}
+                isOpen={isModalOpen}
+                cancelHandler={() => setIsModalOpen(false)}
+                submitHandler={(data, reset) => {
+                    console.log(data);
+                    reset(addUser?.initialValues);
+                    setIsModalOpen(false);
+                }}
+                fields={addUser?.fields}
+                initialValues={addUser?.initialValues}
+                schema={addUser?.schema}
+            />
         </div>
     )
 }

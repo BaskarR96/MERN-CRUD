@@ -4,6 +4,7 @@ const Button = (
     {
         type,
         className,
+        name = '',
         onClick,
         children
     }
@@ -12,6 +13,7 @@ const Button = (
         <button
             type={type}
             className={className}
+            name={name}
             onClick={onClick ? onClick : () => null}
         >
             {children}
