@@ -4,7 +4,9 @@ export const addUser = {
     initialValues: {
         firstName: '',
         lastName: '',
-        email: ''
+        email: '',
+        password: '',
+        confirmPassword: '',
     },
     fields: [
         {
@@ -33,12 +35,39 @@ export const addUser = {
             label: 'Email ID',
             helperText: '',
             isRequired: true,
-        }
+        },
+        {
+            type: 'password',
+            name: 'password',
+            id: 'password',
+            placeholder: 'Enter password',
+            label: 'Password',
+            helperText: '',
+            isRequired: true,
+        },
+        {
+            type: 'text',
+            name: 'confirmPassword',
+            id: 'confirmPassword',
+            placeholder: 'Enter confirm password',
+            label: 'Confirm Password',
+            helperText: '',
+            isRequired: true,
+        },
     ],
     schema: yup.object().shape({
         firstName: yup.string().required('First name is required.'),
         lastName: yup.string().required('Last name is required.'),
         email: yup.string().email('Invalid email.').required('Email is required.'),
+        password: yup.string()
+            .required('Password is required.')
+            .matches(/[A-Z]/, 'Password must contain at least one uppercase letter.')
+            .matches(/\d/, 'Password must contain at least one number.')
+            .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character.')
+            .min(11, 'Password must be at least 11 characters.'),
+        confirmPassword: yup.string()
+            .oneOf([yup.ref('password'), null], 'Passwords must match.')
+            .required('Confirm Password is required.'),
     })
 }
 
@@ -99,5 +128,9 @@ export const deleteUser = {
             isRequired: false,
         },
     ],
-    schema: yup.object()
+    schema: yup.object({
+        confirmDelete: yup.string()
+            .matches(/delete/i, 'Must contain variations of "delete".')
+            .required('Action is required.'),
+    })
 }

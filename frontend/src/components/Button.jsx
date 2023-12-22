@@ -1,22 +1,40 @@
-import React from 'react'
+import React from 'react';
+import { Bars } from 'react-loader-spinner'
 
 const Button = (
     {
         type,
-        className,
         name = '',
+        id = '',
+        className,
+        isLoading,
         onClick,
-        children
+        children,
+        dataCustomAttribute,
     }
 ) => {
     return (
         <button
             type={type}
-            className={className}
             name={name}
+            id={id}
+            className={className}
+            disabled={isLoading}
             onClick={onClick ? onClick : () => null}
+            data-custom-attribute={dataCustomAttribute}
         >
-            {children}
+            {
+                isLoading ?
+                    <Bars
+                        height="20"
+                        width="20"
+                        color="#fff"
+                        ariaLabel="bars-loading"
+                        wrapperStyle={{ justifyContent: "center" }}
+                        wrapperClass=""
+                        visible={true}
+                    /> : children
+            }
         </button>
     )
 }
