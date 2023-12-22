@@ -9,7 +9,8 @@ const Button = (
         className,
         isLoading,
         onClick,
-        children
+        children,
+        dataCustomAttribute,
     }
 ) => {
     return (
@@ -20,6 +21,7 @@ const Button = (
             className={className}
             disabled={isLoading}
             onClick={onClick ? onClick : () => null}
+            data-custom-attribute={dataCustomAttribute}
         >
             {
                 isLoading ?
@@ -28,7 +30,7 @@ const Button = (
                         width="20"
                         color="#fff"
                         ariaLabel="bars-loading"
-                        wrapperStyle={{justifyContent: "center"}}
+                        wrapperStyle={{ justifyContent: "center" }}
                         wrapperClass=""
                         visible={true}
                     /> : children

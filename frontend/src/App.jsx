@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Table from './components/Table';
 import Button from './components/Button';
 import ModalForm from './components/ModalForm';
 import { addUser } from './utilis/formConfigs';
-import { useCreateUserMutation } from './slices/userApiSlice';
+import { useCreateUserMutation, useGetUsersQuery } from './slices/userApiSlice';
 
 function App() {
 
+    const [rows, setRows] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [createUser, { isLoading: userCreateLoading }] = useCreateUserMutation();
+    const {
+        data: usersList = '',
+        error: usersListError,
+        isLoading: usersListLoading,
+        refetch: userListRefetch,
+    } = useGetUsersQuery();
 
     const columns = [
         {
@@ -25,9 +33,13 @@ function App() {
             key: 'email'
         },
     ]
-    const rows = [
-        { first_name: 'Lindsay', last_name: 'Walton', email: 'lindsay.walton@example.com' },
-    ]
+
+    useEffect(() => {
+        if (usersList?.data) {
+            const reverseData = [...usersList.data].reverse()
+            setRows(reverseData);
+        }
+    }, [usersList])
 
     return (
         <>
@@ -55,6 +67,8 @@ function App() {
                             <Table
                                 columns={columns}
                                 rows={rows}
+                                isLoading={usersListLoading}
+                                userListRefetch={userListRefetch}
                             />
                         </div>
                     </div>
@@ -78,6 +92,7 @@ function App() {
                                 reset(addUser?.initialValues);
                                 setIsModalOpen(false);
                                 toast.success(res.message);
+                                userListRefetch();
                             } catch (err) {
                                 toast.error(err?.data?.message || err.error)
                             }

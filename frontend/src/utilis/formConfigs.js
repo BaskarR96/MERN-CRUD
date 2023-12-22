@@ -4,7 +4,9 @@ export const addUser = {
     initialValues: {
         firstName: '',
         lastName: '',
-        email: ''
+        email: '',
+        password: '',
+        confirmPassword: '',
     },
     fields: [
         {
@@ -126,5 +128,9 @@ export const deleteUser = {
             isRequired: false,
         },
     ],
-    schema: yup.object()
+    schema: yup.object({
+        confirmDelete: yup.string()
+            .matches(/delete/i, 'Must contain variations of "delete".')
+            .required('Action is required.'),
+    })
 }
