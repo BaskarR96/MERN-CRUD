@@ -8,7 +8,7 @@ export default defineConfig({
         port: 3000,
         proxy: {
             '/api': {
-                target: 'https://mern-crud-backend-wine.vercel.app/',
+                target: 'https://mern-crud-backend-chi.vercel.app',
                 changeOrigin: true,
             },
         },
