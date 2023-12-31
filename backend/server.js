@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/users', userRoutes);
 
 app.use(cors({
-    origin:['http://localhost:3000']
+    origin:['https://mern-crud-frontend-five.vercel.app']
 }))
 
 app.use(notFound);
