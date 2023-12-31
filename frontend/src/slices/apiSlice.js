@@ -4,7 +4,7 @@ const baseQuery = fetchBaseQuery({
     baseUrl: 'https://mern-crud-backend-psi.vercel.app',
     headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://mern-crud-backend-psi.vercel.app',
+        'Access-Control-Allow-Origin': 'https://mern-crud-frontend-five.vercel.app',
         'Access-Control-Allow-Credentials': true
     }
 });
