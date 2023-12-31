@@ -10,6 +10,7 @@ export default defineConfig({
             '/api': {
                 target: 'https://mern-crud-backend-psi.vercel.app',
                 changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, '')
             },
         },
     },
