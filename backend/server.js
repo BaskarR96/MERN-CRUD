@@ -18,8 +18,7 @@ app.use('/api/users', userRoutes);
 
 app.use(cors({
     origin:['https://mern-crud-frontend-five.vercel.app'],
-    methods:['POST', 'GET', 'PUT', 'DELETE'],
-    credentials: true
+    methods:['POST', 'GET', 'PUT', 'DELETE']
 }))
 
 app.use(notFound);
