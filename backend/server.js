@@ -15,7 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-    origin: ['https://mern-crud-frontend-five.vercel.app/']
+    origin: ['https://mern-crud-frontend-five.vercel.app/'],
+    methods: '*',
+    allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
+    credentials: true,
 }))
 
 app.use('/api/users', userRoutes);
