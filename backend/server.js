@@ -5,6 +5,7 @@ dotenv.config();
 import userRoutes from './routes/userRoutes.js'
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
+import cors from 'cors';
 
 connectDB();
 
@@ -14,6 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/users', userRoutes);
+
+app.use(cors({
+    origin:['http://localhost:3000']
+}))
 
 app.use(notFound);
 app.use(errorHandler);
