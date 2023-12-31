@@ -5,7 +5,7 @@ const baseQuery = fetchBaseQuery({
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': *
-    },
+    }
 });
 
 export const apiSlice = createApi({
