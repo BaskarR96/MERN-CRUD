@@ -14,12 +14,11 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/users', userRoutes);
-
 app.use(cors({
-    origin:['https://mern-crud-frontend-five.vercel.app'],
-    methods:['POST', 'GET', 'PUT', 'DELETE']
+    origin: ['http://localhost:3000']
 }))
+
+app.use('/api/users', userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
