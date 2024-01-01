@@ -5,7 +5,7 @@ const baseQuery = fetchBaseQuery({
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Access-Control-Allow-Origin': 'https://mern-crud-frontend-five.vercel.app',
+        'Access-Control-Allow-Origin': '*',
     }
 });
 
